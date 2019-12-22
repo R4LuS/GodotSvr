@@ -11,7 +11,7 @@ var id = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	id = $Network.connect_to_server("127.0.0.1", 6500)
+	id = $Network.connect_to_server("127.0.0.1", 30000)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var time = 0
@@ -30,7 +30,9 @@ func _process(delta):
 			var aux = a.split(" ")
 			if aux[0] == "1001":
 				update_player(aux[1], int(aux[2]), int(aux[3]), int(aux[4]), aux[5])
-			if aux[0] == "1011":
+			elif aux[0] == "1002":
+				delete_player(aux[1])
+			elif aux[0] == "1011":
 				create_bullet(int(aux[1]), int(aux[2]), int(aux[3]), int(aux[4]), int(aux[5]))
 
 func update_player(id, speedx, speedy, posx, posy):
@@ -43,6 +45,10 @@ func update_player(id, speedx, speedy, posx, posy):
 	if $Players.has_node(id):
 		$Players.get_node(id).set_speed(speedx, speedy)
 		$Players.get_node(id).set_position(Vector2(posx, posy));
+
+func delete_player(id):
+	print("Player deleted: " + id)
+	$Players.remove_child($Players.get_node(id))
 
 func create_bullet(rotation, mousex, mousey, posx, posy):
 	var nbullet = bullet_p.instance()
