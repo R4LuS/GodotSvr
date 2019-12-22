@@ -4,6 +4,7 @@
 NetServer::NetServer(int port, QObject *parent) : QTcpServer(parent)
 {
 	connect(this, SIGNAL(newConnection()), this, SLOT(newConnection()));
+	qDebug() << port;
 	listen(QHostAddress::Any, port);
 	qDebug() << "Server started!";
 }

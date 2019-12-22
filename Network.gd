@@ -21,7 +21,10 @@ func connect_to_server(host, port):
 	if !client.is_connected_to_host():
 		print("Connecting...")
 		client.connect_to_host(host, port)
+		while client.get_status() == 1:
+			print("e m pika el kulo")
 		if client.get_status() == 2:
+			print("Conectado")
 			var data = client.get_string(9)
 			var data_split = data.split(" ")
 			id = data_split[0]

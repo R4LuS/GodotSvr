@@ -30,10 +30,6 @@ void Client::incomingData()
 		default:
 			qDebug() << "[Unknown:" << aux[0] << "]" << data;
 		}
-	if(aux[0] == "1000")
-	{
-
-	}
 }
 
 int Client::send(QByteArray data)
@@ -45,4 +41,7 @@ int Client::send(QByteArray data)
 void Client::closed()
 {
 	qDebug() << "Client " << id << " disconnected!";
+	QByteArray sdata = "";
+	sdata += "1002 " + QString::number(id) + " ";
+	emit sendInfo(this, sdata);
 }
