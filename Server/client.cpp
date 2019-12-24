@@ -3,7 +3,6 @@
 Client::Client(QTcpSocket *nsocket)
 {
 	this->socket = nsocket;
-	id = static_cast<int>(socket->socketDescriptor());
 }
 
 
@@ -24,7 +23,7 @@ void Client::incomingData()
 			emit sendInfo(this, sdata);
 			break;
 		case 1010:
-			 sdata += "1011 " + aux[1] + " " + aux[2] + " " + aux[3] + " " + aux[4] + " " + aux[5] + " ";
+			 sdata += "1011 " + aux[1] + " " + aux[2] + " " + aux[3] + " " + aux[4] + " " + aux[5] + " " + QString::number(id) + " ";
 			emit sendInfo(this, sdata);
 			break;
 		default:

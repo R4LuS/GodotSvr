@@ -9,6 +9,7 @@ var is_player = false
 var net = null
 var njumps = 2
 var MAX_JUMPS = 2
+var hp = 100.0
 
 
 var bullet_p = preload("res://Bullet.tscn")
@@ -16,6 +17,7 @@ var bullet_p = preload("res://Bullet.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	net = get_parent().get_parent().get_node("Network")
+	
 
 
 func _process(delta):
@@ -54,8 +56,11 @@ func _physics_process(delta):
 			nbullet.pos_to = mouse_pos
 			nbullet.set_position(position)
 			nbullet.look_at(mouse_pos)
+			nbullet.set_collision_layer_bit(11, true)
 			nbullet.init()
+			nbullet.id = get_name()
 			bullet_time = 0
+			
 			net.send("1010 " + str(nbullet.rotation) + " " + str(mouse_pos.x) + " " + str(mouse_pos.y) + " " +
 			str(position.x) + " " + str(position.y) + " ")
 		speed_x = nspeed_x
@@ -70,3 +75,6 @@ func set_speed(nx, ny):
 	speed_x = int(nx)
 	speed_y = int(ny)
 
+func hp_down(dmg):
+	hp = max(hp - dmg, 0)
+	$HpBar.scale = Vector2(hp/100.0, 1)

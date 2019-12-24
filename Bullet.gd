@@ -6,6 +6,8 @@ extends RigidBody2D
 
 var SPEED = 300
 var time = 0
+var id = ""
+var DMG = 10.0
 
 var pos_to = Vector2()
 
@@ -19,7 +21,11 @@ func _physics_process(delta):
 		get_parent().remove_child(self)
 
 func mcollision(node):
-	get_parent().remove_child(self)
+	if node.get_name() != id:
+		queue_free()
+		if node.has_method("hp_down"):
+			node.hp_down(DMG)
+	print("Collide with: " + node.get_name())
 
 func init():
 	var speedv = (pos_to - position).normalized() * SPEED

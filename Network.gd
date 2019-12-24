@@ -31,8 +31,7 @@ func connect_to_server(host, port):
 			var nplayer = player_p.instance()
 			get_parent().get_node("Players").add_child(nplayer)
 			nplayer.set_name(data_split[0])
-			nplayer.set_collision_layer_bit(4, true)
-			nplayer.set_collision_layer_bit(5, false)
+			nplayer.set_collision_mask_bit(10, true)
 			nplayer.set_position(Vector2(int(data_split[1]), int(data_split[2])));
 			nplayer.is_player = true
 		return id

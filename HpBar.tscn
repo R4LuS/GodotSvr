@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/SleekBars.png" type="Texture" id=1]
+
+[node name="HpBar" type="Node2D"]
+
+[node name="SleekBars" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 4, 36, 120, 24 )

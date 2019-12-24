@@ -33,7 +33,7 @@ func _process(delta):
 			elif aux[0] == "1002":
 				delete_player(aux[1])
 			elif aux[0] == "1011":
-				create_bullet(int(aux[1]), int(aux[2]), int(aux[3]), int(aux[4]), int(aux[5]))
+				create_bullet(int(aux[1]), int(aux[2]), int(aux[3]), int(aux[4]), int(aux[5]), aux[6])
 
 func update_player(id, speedx, speedy, posx, posy):
 	if not $Players.has_node(id):
@@ -41,6 +41,7 @@ func update_player(id, speedx, speedy, posx, posy):
 		$Players.add_child(nplayer)
 		nplayer.set_name(id)
 		nplayer.set_position(Vector2(posx, posy));
+		nplayer.set_collision_mask_bit(11, true)
 		print("Nuevo player creado")
 	if $Players.has_node(id):
 		$Players.get_node(id).set_speed(speedx, speedy)
@@ -50,13 +51,14 @@ func delete_player(id):
 	print("Player deleted: " + id)
 	$Players.remove_child($Players.get_node(id))
 
-func create_bullet(rotation, mousex, mousey, posx, posy):
+func create_bullet(rotation, mousex, mousey, posx, posy, nid):
 	var nbullet = bullet_p.instance()
 	var mouse_pos = Vector2(mousex, mousey)
 	$Bullets.add_child(nbullet)
 	nbullet.set_position(Vector2(posx, posy))
-	nbullet.set_collision_mask_bit(1, true)
+	nbullet.set_collision_layer_bit(10, true)
 	nbullet.pos_to = mouse_pos
 	nbullet.look_at(mouse_pos)
+	nbullet.id = nid
 	nbullet.init()
 
