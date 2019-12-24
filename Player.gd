@@ -17,7 +17,6 @@ var bullet_p = preload("res://Bullet.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	net = get_parent().get_parent().get_node("Network")
-	
 
 
 func _process(delta):
