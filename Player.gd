@@ -23,7 +23,7 @@ func _process(delta):
 	pass
 		
 
-var bullet_cd = 0.5
+var bullet_cd = 2
 var bullet_time = bullet_cd
 var jump_cd = 0.5
 var jump_time = jump_cd
@@ -68,6 +68,7 @@ func _physics_process(delta):
 	bullet_time += delta
 	jump_time += delta
 	speed_y += gravity * delta
+	get_parent().get_parent().get_node("GUI").set_ShootCd(max(0, (bullet_cd - bullet_time) / bullet_cd * 100))
 	move_and_slide(Vector2(speed_x, speed_y), Vector2.UP)
 
 func set_speed(nx, ny):
