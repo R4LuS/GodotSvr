@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Battle in the winter.wav-6889f5ee3322e05f5baef0f9488b3f0a.sample"
+
+[deps]
+
+source_file="res://data/Music/Battle in the winter.wav"
+dest_files=[ "res://.import/Battle in the winter.wav-6889f5ee3322e05f5baef0f9488b3f0a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
