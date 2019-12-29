@@ -12,36 +12,34 @@ var MAX_JUMPS = 2
 var hp = 100.0
 
 var bullet_p = preload("res://Scenes/Bullet.tscn")
+var character
 
-var anim_hero = Sprite
 var timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	net = get_parent().get_parent().get_node("Network")
-	anim_hero = $hero_falling
-	timer.connect("timeout", self, "animation")
-	add_child(timer)
-	timer.start(0.1)
-	
-
+	character = load("res://Scenes/ChRabbit.tscn").instance()
+	add_child(character)
 
 func _process(delta):
 	pass
+
 
 var bullet_cd = 0.4
 var bullet_time = bullet_cd
 var jump_cd = 0.5
 var jump_time = jump_cd
 
+
 var time_to_shoot = 0.2
 var on_shooting = false
+
 
 func _physics_process(delta):
 	var nspeed_x = 0
 	var nspeed_y = 0
 	if is_player:
-		
 		if Input.is_action_pressed("ui_a"):
 			nspeed_x = -SPEED
 		if Input.is_action_pressed("ui_d"):
@@ -53,17 +51,17 @@ func _physics_process(delta):
 			if is_on_floor():
 				njumps = 0
 			if speed_x == 0:
-				change_anim($hero)
+				change_anim("hero")
 			else:
-				change_anim($hero_run)
+				change_anim("hero_run")
 		elif speed_y > 0:
-			change_anim($hero_falling)
+			change_anim("hero_falling")
 		if Input.is_action_pressed("ui_jump") and njumps < MAX_JUMPS and jump_time >= jump_cd:
 			nspeed_y = -JUMP_SPEED
 			speed_y = nspeed_y
 			njumps += 1
 			jump_time = 0
-			change_anim($hero_jump)
+			change_anim("hero_jump")
 		if Input.is_action_pressed("ui_shot") and bullet_time >= bullet_cd:
 			var nbullet = bullet_p.instance()
 			var mouse_pos = get_viewport().get_mouse_position()
@@ -74,18 +72,17 @@ func _physics_process(delta):
 			nbullet.set_collision_layer_bit(11, true)
 			nbullet.init()
 			nbullet.id = get_name()
-			change_anim($hero_shoot)
+			change_anim("hero_shoot")
 			on_shooting = true
 			bullet_time = 0
-			anim_hero.set_flip_h(false)
+			character.flip(false)
 			if mouse_pos.x < position.x:
-				anim_hero.set_flip_h(true)
-			
+				character.flip(true)
 			net.send("1010 " + str(nbullet.rotation) + " " + str(mouse_pos.x) + " " + str(mouse_pos.y) + " " +
 			str(position.x) + " " + str(position.y) + " ")
 		speed_x = nspeed_x
 		if speed_x != 0:
-			anim_hero.set_flip_h(speed_x < 0)
+			character.flip(speed_x < 0)
 		if net:
 			net.send("1000 " + str(speed_x) + " " + str(speed_y) + " " + str(position.x) + " " + str(position.y))
 	bullet_time += delta
@@ -93,17 +90,12 @@ func _physics_process(delta):
 	speed_y += gravity * delta
 	get_parent().get_parent().get_node("GUI").set_ShootCd(max(0, (bullet_cd - bullet_time) / bullet_cd * 100))
 	speed_y = move_and_slide(Vector2(speed_x, speed_y), Vector2.UP).y
-	
 
-func change_anim(hero):
+func change_anim(hero_name):
 	if on_shooting != true:
-		anim_hero.set_visible(false)
-		anim_hero = hero
-		anim_hero.set_visible(true)
+		character.change_anim(hero_name)
 	elif time_to_shoot < bullet_time:
 			on_shooting = false
-
-
 
 func set_speed(nx, ny):
 	speed_x = int(nx)
@@ -112,12 +104,3 @@ func set_speed(nx, ny):
 func hp_down(dmg):
 	hp = max(hp - dmg, 0)
 	$HpBar.scale = Vector2(hp/100.0, 1)
-
-func animation():
-	anim_hero.set_frame((anim_hero.get_frame() + 1) % anim_hero.get_hframes())
-	
-	
-	
-	
-	
-	

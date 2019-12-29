@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/ChRabbit.gd" type="Script" id=1]
+[ext_resource path="res://data/hero11.png" type="Texture" id=2]
+
+[node name="ChRabbit" type="Node2D"]
+position = Vector2( 0.814484, 0.814514 )
+script = ExtResource( 1 )
+
+[node name="hero" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 4
+region_enabled = true
+region_rect = Rect2( 13, 21, 172, 70 )
+
+[node name="hero_run" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+hframes = 5
+region_enabled = true
+region_rect = Rect2( 10, 108, 324, 60 )
+
+[node name="hero_jump" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+hframes = 3
+region_enabled = true
+region_rect = Rect2( 205, 184, 126, 73 )
+
+[node name="hero_shoot" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+hframes = 2
+region_enabled = true
+region_rect = Rect2( 15, 364, 114, 69 )
+
+[node name="hero_falling" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 349, 177, 48, 78 )

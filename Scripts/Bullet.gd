@@ -14,7 +14,6 @@ var pos_to = Vector2()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("body_entered", self, "mcollision")
-	
 
 func _physics_process(delta):
 	time += delta

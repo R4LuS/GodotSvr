@@ -27,7 +27,7 @@ void Client::incomingData()
 			emit sendInfo(this, sdata);
 			break;
 		default:
-			qDebug() << "[Unknown:" << aux[0] << "]" << data;
+			qDebug() << "\e[31mred" <<"[Unknown:" << aux[0] << "]" << data << "\e[0m";
 		}
 }
 
@@ -39,7 +39,7 @@ int Client::send(QByteArray data)
 
 void Client::closed()
 {
-	qDebug() << "Client " << id << " disconnected!";
+	qDebug() << "\e[31m" << "Client " << id << " disconnected!" << "\e[0m";
 	QByteArray sdata = "";
 	sdata += "1002 " + QString::number(id) + " ";
 	emit sendInfo(this, sdata);

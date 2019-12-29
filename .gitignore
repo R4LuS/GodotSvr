@@ -1,2 +1,6 @@
 bin/*
 RawData/*
+addons
+addons/*
+.import
+.import/*

@@ -41,7 +41,6 @@ region_rect = Rect2( 205, 184, 126, 73 )
 visible = false
 texture = ExtResource( 4 )
 hframes = 5
-frame = 4
 region_enabled = true
 region_rect = Rect2( 10, 108, 324, 60 )
 

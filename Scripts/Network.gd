@@ -12,17 +12,13 @@ var player_p = preload("res://Scenes/Player.tscn")
 func _ready():
 	client = StreamPeerTCP.new()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func connect_to_server(host, port):
 	var id = 0
 	if !client.is_connected_to_host():
 		print("Connecting...")
 		client.connect_to_host(host, port)
 		while client.get_status() == 1:
-			print("e m pika el kulo")
+			pass
 		if client.get_status() == 2:
 			print("Conectado")
 			var data = client.get_string(9)

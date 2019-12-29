@@ -20,7 +20,7 @@ void NetServer::newConnection()
 	connect(nclient, SIGNAL(sendInfo(Client *, QByteArray)), this, SLOT(sendAll_sl(Client *, QByteArray)));
 	players.append(nclient);
 	nclient->set_id(n++);
-	qDebug() << "New client: " << nclient->get_id();
+	qDebug() << "\e[32m" <<"New client: " << nclient->get_id() << "\e[0m";
 	char aux[20];
 	//sprintf(aux, "%d %d %d", nclient->get_id(), gen->bounded(300, 700), 400);
 	sprintf(aux, "%d %d %d", nclient->get_id(), 500, 400);
