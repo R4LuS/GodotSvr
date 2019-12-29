@@ -6,9 +6,11 @@
 #include <QDebug>
 #include <QList>
 #include <QTimer>
-#include <client.h>
 
-#include <box2d/box2d.h>
+#include <client.h>
+#include <gLogging.h>
+#include <world.h>
+
 
 class NetServer : public QTcpServer
 {
@@ -30,7 +32,7 @@ private:
 	QList<Client *> players;
 	int n = 1;
 
-	b2World *world;
+	World *world;
 };
 
 

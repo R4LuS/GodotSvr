@@ -7,5 +7,5 @@ addons
 addons/*
 .import
 .import/*
-Server/box2d-master
-Server/box2d-master/*
+Server/generate_files
+Server/generate_files/*

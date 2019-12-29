@@ -17,20 +17,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        client.cpp \
-        main.cpp \
-        netserver.cpp \
-        gLogging.cpp
+        src/client.cpp \
+        src/main.cpp \
+        src/netserver.cpp \
+        src/gLogging.cpp \
+        src/world.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+INCLUDEPATH += include
+
 HEADERS += \
-    client.h \
-    netserver.h \
-    gLogging.h
+    include/client.h \
+    include/netserver.h \
+    include/gLogging.h \
+    include/world.h
+
+DESTDIR = bin
+OBJECTS_DIR = generated_files
+MOC_DIR = generated_files
+
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../../../../Box2D/build/src/release/ -lbox2d
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../../../../Box2D/build/src/debug/ -lbox2d
@@ -44,3 +53,4 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../..
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../Box2D/build/src/release/box2d.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../../Box2D/build/src/debug/box2d.lib
 else:unix: PRE_TARGETDEPS += $$PWD/../../../../../../Box2D/build/src/libbox2d.a
+

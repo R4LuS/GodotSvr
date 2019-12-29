@@ -28,6 +28,7 @@ void Client::incomingData()
 			break;
 		default:
 			qDebug() << "\e[31m" <<"[Unknown:" << aux[0] << "]" << data << "\e[0m";
+			gLogging::warning("Unknown packet: " + aux[0]);
 		}
 }
 
