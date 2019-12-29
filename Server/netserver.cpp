@@ -1,28 +1,27 @@
 #include "netserver.h"
-//#include <QRandomGenerator64>
+#include "gLogging.h"
 
 NetServer::NetServer(int port, QObject *parent) : QTcpServer(parent)
 {
+	world = new b2World(b2Vec2(0.0f, 0.0f));
+	gLogging::info("World created!");
 	connect(this, SIGNAL(newConnection()), this, SLOT(newConnection()));
-	qDebug() << port;
 	listen(QHostAddress::Any, port);
-	qDebug() << "Server started!";
+	gLogging::info("Server opened and listening to incoming clients: " + QString::number(port));
 }
 
 void NetServer::newConnection()
 {
 	QTcpSocket *nsocket = nextPendingConnection();
 	Client *nclient = new Client(nsocket);
-	//	QRandomGenerator64 *gen = new QRandomGenerator64;
 	connect(nsocket, SIGNAL(readyRead()), nclient, SLOT(incomingData()));
 	connect(nsocket, SIGNAL(disconnected()), nclient, SLOT(closed()));
 	connect(nclient, SIGNAL(updatedInfo(Client *)), this, SLOT(sendAll_UpdatedInfo(Client *)));
 	connect(nclient, SIGNAL(sendInfo(Client *, QByteArray)), this, SLOT(sendAll_sl(Client *, QByteArray)));
 	players.append(nclient);
 	nclient->set_id(n++);
-	qDebug() << "\e[32m" <<"New client: " << nclient->get_id() << "\e[0m";
+	gLogging::info("New client: " + QString::number(nclient->get_id()));
 	char aux[20];
-	//sprintf(aux, "%d %d %d", nclient->get_id(), gen->bounded(300, 700), 400);
 	sprintf(aux, "%d %d %d", nclient->get_id(), 500, 400);
 	nsocket->write(aux);
 }

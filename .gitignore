@@ -1,6 +1,11 @@
+
+bin
 bin/*
+RawData
 RawData/*
 addons
 addons/*
 .import
 .import/*
+Server/box2d-master
+Server/box2d-master/*

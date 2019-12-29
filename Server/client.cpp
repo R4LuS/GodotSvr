@@ -27,7 +27,7 @@ void Client::incomingData()
 			emit sendInfo(this, sdata);
 			break;
 		default:
-			qDebug() << "\e[31mred" <<"[Unknown:" << aux[0] << "]" << data << "\e[0m";
+			qDebug() << "\e[31m" <<"[Unknown:" << aux[0] << "]" << data << "\e[0m";
 		}
 }
 

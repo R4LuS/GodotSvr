@@ -11,8 +11,8 @@ var id = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#id = $Network.connect_to_server("127.0.0.1", 30000)
-	id = $Network.connect_to_server("almondigas.cluster.sergio.link", 30000)
+	id = $Network.connect_to_server("127.0.0.1", 30000)
+	#id = $Network.connect_to_server("almondigas.cluster.sergio.link", 30000)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var time = 0

@@ -35,5 +35,5 @@ func connect_to_server(host, port):
 		print("Client already connected.")
 
 func send(data):
-	client.put_string(data)
-	pass
+	if client.is_connected_to_host():
+		client.put_string(data)
