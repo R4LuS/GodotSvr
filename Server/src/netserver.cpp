@@ -12,7 +12,7 @@ NetServer::NetServer(int port, QObject *parent) : QTcpServer(parent)
 void NetServer::newConnection()
 {
 	QTcpSocket *nsocket = nextPendingConnection();
-	Client *nclient = new Client(nsocket);
+	Client *nclient = new Client(nsocket, world->add_body(b2Vec2(), b2Vec2()));
 	connect(nsocket, SIGNAL(readyRead()), nclient, SLOT(incomingData()));
 	connect(nsocket, SIGNAL(disconnected()), nclient, SLOT(closed()));
 	connect(nclient, SIGNAL(updatedInfo(Client *)), this, SLOT(sendAll_UpdatedInfo(Client *)));

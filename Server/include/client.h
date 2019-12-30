@@ -5,13 +5,15 @@
 #include <QTcpSocket>
 #include <QDebug>
 
+#include <world.h>
+
 #include <gLogging.h>
 
 class Client : public QObject
 {
 	Q_OBJECT
 public:
-	Client(QTcpSocket *nsocket);
+	Client(QTcpSocket *nsocket, b2Body *body);
 	int send(QByteArray data);
 	int get_id() { return this->id; }
 	void set_id(int id) { this->id = id; }
@@ -28,6 +30,7 @@ public slots:
 
 private:
 	QTcpSocket *socket;
+	b2Body *body;
 	int x, y;
 	int speedx = 500, speedy = 500;
 	int id;

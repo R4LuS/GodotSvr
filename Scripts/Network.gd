@@ -36,4 +36,5 @@ func connect_to_server(host, port):
 
 func send(data):
 	if client.is_connected_to_host():
+		
 		client.put_string(data)

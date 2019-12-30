@@ -1,8 +1,10 @@
 #include "client.h"
 
-Client::Client(QTcpSocket *nsocket)
+Client::Client(QTcpSocket *nsocket, b2Body *body)
 {
 	this->socket = nsocket;
+	this->body = body;
+	this->body->SetUserData(this);
 }
 
 
@@ -17,8 +19,10 @@ void Client::incomingData()
 		case 1000:
 			speedx = atoi(aux[1]);
 			speedy = atoi(aux[2]);
+			body->ApplyForce(b2Vec2(speedx, 0), body->GetWorldCenter(), true);
 			x = atoi(aux[3]);
 			y = atoi(aux[4]);
+			//body->SetTransform(b2Vec2(x, y), body->GetAngle());
 			sdata += "1001 " + QString::number(id) + " " + QString::number(speedx) + " " + QString::number(speedy) + " " + QString::number(x) + " " + QString::number(y) + " ";
 			emit sendInfo(this, sdata);
 			break;
@@ -40,7 +44,7 @@ int Client::send(QByteArray data)
 
 void Client::closed()
 {
-	qDebug() << "\e[31m" << "Client " << id << " disconnected!" << "\e[0m";
+	gLogging::error("Client " + QString::number(id) + " disconnected!");
 	QByteArray sdata = "";
 	sdata += "1002 " + QString::number(id) + " ";
 	emit sendInfo(this, sdata);
