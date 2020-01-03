@@ -7,3 +7,5 @@ addons
 addons/*
 .import
 .import/*
+*.exe
+*.pck
