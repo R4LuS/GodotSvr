@@ -16,3 +16,8 @@ void gLogging::error(QString str)
 {
     qDebug().nospace().noquote() << ERROR_COLOR("[ERROR]") << str;
 }
+
+void gLogging::warning(QString str)
+{
+    qDebug().nospace().noquote() << WARNING_COLOR("[WARNING]") << str;
+}

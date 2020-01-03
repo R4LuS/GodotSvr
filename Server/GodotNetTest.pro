@@ -4,6 +4,7 @@ QT += core
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
+CONFIG += precompile_header
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -17,17 +18,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        client.cpp \
-        main.cpp \
-        netserver.cpp \
-        gLogging.cpp
+        src/client.cpp \
+        src/main.cpp \
+        src/netserver.cpp \
+        src/gLogging.cpp 
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+INCLUDEPATH += include
+
 HEADERS += \
-    client.h \
-    netserver.h \
-    gLogging.h
+    include/client.h \
+    include/netserver.h \
+    include/gLogging.h 
+
+DESTDIR = bin
+OBJECTS_DIR = generated_files
+MOC_DIR = generated_files

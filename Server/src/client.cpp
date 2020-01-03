@@ -3,7 +3,6 @@
 Client::Client(QTcpSocket *nsocket)
 {
 	this->socket = nsocket;
-	mbody = new Body(500, 400, 20, 34);
 }
 
 

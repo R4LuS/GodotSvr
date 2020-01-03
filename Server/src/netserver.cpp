@@ -3,7 +3,6 @@
 
 NetServer::NetServer(int port, QObject *parent) : QTcpServer(parent)
 {
-	world = new b2World(b2Vec2(0.0f, 0.0f));
 	gLogging::info("World created!");
 	connect(this, SIGNAL(newConnection()), this, SLOT(newConnection()));
 	listen(QHostAddress::Any, port);

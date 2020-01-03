@@ -8,8 +8,6 @@
 #include <QTimer>
 #include <client.h>
 
-#include <box2d/box2d.h>
-
 class NetServer : public QTcpServer
 {
 	Q_OBJECT
@@ -30,7 +28,6 @@ private:
 	QList<Client *> players;
 	int n = 1;
 
-	b2World *world;
 };
 
 

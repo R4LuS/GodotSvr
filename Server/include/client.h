@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QDebug>
 
+#include <gLogging.h>
+
 
 class Client : public QObject
 {
