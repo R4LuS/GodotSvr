@@ -12,7 +12,6 @@ void Client::incomingData()
 	QByteArray sdata = "";
 	auto aux = data.mid(4).split(' ');
 	if(aux[0].length() <= 0) return;
-	gLogging::error(QString(data));
 	switch(aux[0].toInt())
 	{
 		case 1000:

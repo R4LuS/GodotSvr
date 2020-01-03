@@ -3,7 +3,6 @@
 
 NetServer::NetServer(int port, QObject *parent) : QTcpServer(parent)
 {
-	gLogging::info("World created!");
 	connect(this, SIGNAL(newConnection()), this, SLOT(newConnection()));
 	listen(QHostAddress::Any, port);
 	gLogging::info("Server opened and listening to incoming clients: " + QString::number(port));
